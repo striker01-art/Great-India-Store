@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="support-wrapper" style="max-width: 800px;">
+    <div class="support-header">
+        <h2><i class="fa-solid fa-cart-shopping"></i> Your Shopping Cart</h2>
+    </div>
+    
+    <div class="support-body">
+        {% if items %}
+        <table style="width: 100%; text-align: left; border-collapse: collapse; margin-bottom: 30px;">
+            <tr style="border-bottom: 2px solid var(--border);">
+                <th style="padding: 10px;">Product</th>
+                <th style="padding: 10px;">Price</th>
+                <th style="padding: 10px;">Qty</th>
+                <th style="padding: 10px;">Total</th>
+            </tr>
+            {% for item in items %}
+            <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 15px 10px; font-weight: 600;">{{ item['name'] }}</td>
+                <td style="padding: 15px 10px; color: var(--text-secondary);">₹{{ item['price'] }}</td>
+                <td style="padding: 15px 10px;">{{ item['quantity'] }}</td>
+                <td style="padding: 15px 10px; color: var(--primary); font-weight: 600;">₹{{ item['price'] * item['quantity'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <div style="text-align: right; margin-bottom: 20px;">
+            <h3 style="font-size: 24px;">Grand Total: <span style="color: var(--primary);">₹{{ total }}</span></h3>
+        </div>
+        
+        <a href="{{ url_for('checkout') }}" class="btn" style="background-color: #10b981;"><i class="fa-solid fa-credit-card"></i> Proceed to Secure Checkout</a>
+        {% else %}
+        <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+            <i class="fa-solid fa-basket-shopping" style="font-size: 48px; margin-bottom: 20px;"></i>
+            <h3>Your cart is empty</h3>
+            <a href="{{ url_for('index') }}" class="btn" style="margin-top: 20px; width: auto; display: inline-block;">Start Shopping</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
