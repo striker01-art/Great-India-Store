@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <i class="fa-solid fa-user-shield" style="font-size: 36px; color: #ef4444;"></i>
+        <h2 style="font-family: 'Poppins', sans-serif; font-size: 28px; margin: 0;">Admin Dashboard</h2>
+    </div>
+    <a href="{{ url_for('admin_logout') }}" class="btn" style="background: var(--border); color: var(--text-primary); width: auto; padding: 10px 20px;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+    <div class="support-wrapper" style="margin: 0; width: 100%; max-width: none;">
+        <div class="support-header" style="background: #1e293b; text-align: left; padding: 20px;">
+            <h3 style="margin: 0; font-size: 18px;"><i class="fa-solid fa-dolly"></i> Recent Orders</h3>
+        </div>
+        <div class="support-body" style="padding: 0;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                {% for order in orders %}
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 15px;">#ORD-{{ order['id'] }}</td>
+                    <td style="padding: 15px; color: var(--primary); font-weight: 600;">₹{{ order['total_amount'] if 'total_amount' in order.keys() else '0.00' }}</td>
+                    <td style="padding: 15px;">{{ order['status'] if 'status' in order.keys() else 'Processing' }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="3" style="padding: 20px; text-align: center;">No orders in system.</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="support-wrapper" style="margin: 0; width: 100%; max-width: none;">
+        <div class="support-header" style="background: #ef4444; text-align: left; padding: 20px;">
+            <h3 style="margin: 0; font-size: 18px;"><i class="fa-solid fa-ticket"></i> Support Tickets</h3>
+        </div>
+        <div class="support-body" style="padding: 0;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                {% for ticket in tickets %}
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 15px; font-weight: 600;">USR-000{{ ticket['user_id'] }}</td>
+                    <td style="padding: 15px;">{{ ticket['subject'] }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="2" style="padding: 20px; text-align: center;">No active tickets.</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
