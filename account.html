@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="support-wrapper" style="max-width: 500px; margin-top: 60px;">
+    <div class="support-header" style="background: linear-gradient(135deg, var(--primary) 0%, #818cf8 100%);">
+        <i class="fa-solid fa-circle-user" style="font-size: 60px; margin-bottom: 15px; color: white;"></i>
+        <h2>My Profile</h2>
+        <p style="color: #e0e7ff;">Welcome back to Great India Store</p>
+    </div>
+    
+    <div class="support-body">
+        <div style="margin-bottom: 20px;">
+            <label class="field-label">Customer ID</label>
+            <div style="padding: 12px; background: var(--background); border-radius: 8px; font-family: monospace; font-size: 15px;">
+                USR-000{{ current_user }}
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 25px;">
+            <label class="field-label">Account Status</label>
+            <div style="padding: 12px; background: #d1fae5; color: #065f46; border-radius: 8px; font-weight: 600; font-size: 14px;">
+                <i class="fa-solid fa-shield-check"></i> Verified Buyer
+            </div>
+        </div>
+        
+        <label class="field-label">Activity Summary</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;">
+            <div style="padding: 15px; background: var(--background); border-radius: 8px; text-align: center; border: 1px solid var(--border);">
+                <div style="font-size: 24px; font-weight: 700; color: var(--primary);">{{ orders_count }}</div>
+                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; margin-top: 5px;">Total Orders</div>
+            </div>
+            <div style="padding: 15px; background: var(--background); border-radius: 8px; text-align: center; border: 1px solid var(--border);">
+                <div style="font-size: 24px; font-weight: 700; color: var(--accent);">{{ tickets_count }}</div>
+                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; margin-top: 5px;">Active Tickets</div>
+            </div>
+        </div>
+        
+        <a href="{{ url_for('history') }}" class="btn"><i class="fa-solid fa-box-open"></i> View Order Ledger</a>
+    </div>
+</div>
+{% endblock %}
