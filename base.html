@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GREAT INDIA STORE | Premium Selection</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=13">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('index') }}" class="brand">
+            <img src="{{ url_for('static', filename='logo.png') }}" class="brand-logo" alt="Great India Store Logo">
+            <h2>GREAT INDIA STORE</h2>
+        </a>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        
+        <form class="search-form" action="{{ url_for('index') }}" method="GET">
+            <input type="text" name="q" class="search-input" placeholder="Search premium collections..." value="{{ search_query if search_query else '' }}">
+            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+
+        <nav id="nav-menu">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('cart') }}">Cart</a>
+            <a href="{{ url_for('history') }}">Orders</a>
+            <a href="{{ url_for('support') }}">Support</a>
+            <a href="{{ url_for('account') }}"><i class="fa-solid fa-circle-user"></i> Account</a>
+            <a href="{{ url_for('admin_login') }}" class="admin-link"><i class="fa-solid fa-lock"></i></a>
+        </nav>
+    </header>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="toast"><i class="fa-solid fa-circle-check"></i> {{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>About</h4>
+                <a href="{{ url_for('info_page', page_id='contact') }}">Contact Us</a>
+                <a href="{{ url_for('info_page', page_id='about') }}">About GIS</a>
+                <a href="{{ url_for('info_page', page_id='careers') }}">Careers</a>
+                <a href="{{ url_for('info_page', page_id='stories') }}">GIS Stories</a>
+            </div>
+            <div class="footer-col">
+                <h4>Help Center</h4>
+                <a href="{{ url_for('info_page', page_id='payments') }}">Payments</a>
+                <a href="{{ url_for('info_page', page_id='shipping') }}">Shipping</a>
+                <a href="{{ url_for('info_page', page_id='returns') }}">Cancellation & Returns</a>
+                <a href="{{ url_for('support') }}">File a Support Ticket</a>
+            </div>
+            <div class="footer-col">
+                <h4>Consumer Policy</h4>
+                <a href="{{ url_for('info_page', page_id='returns') }}">Return Policy</a>
+                <a href="{{ url_for('info_page', page_id='terms') }}">Terms of Use</a>
+                <a href="{{ url_for('info_page', page_id='policy') }}">Security & Privacy</a>
+            </div>
+            <div class="footer-col">
+                <h4>Registered Office Address</h4>
+                <p>
+                    Great India Store Private Limited,<br>
+                    Embassy Tech Village, RAMGARH, JHARGRAM, 721128,<br>
+                    WEST BENGAL, INDIA
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Great India Store. Developed By SOUMYADEEP, DIPRAJ, SAYAN, ARIJIT, ARKA, TRIJOY.<br>
+             Developed for RRKGP CST MINOR Project.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.getElementById('mobile-menu');
+            const navMenu = document.getElementById('nav-menu');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
