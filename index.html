@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="margin-bottom: 40px;">
+    <h1 style="font-family: 'Poppins', sans-serif; font-size: 36px; margin-bottom: 10px;">Elevate Your Lifestyle</h1>
+    <p style="color: var(--text-secondary); font-size: 18px;">Discover our curated collection of premium tech, accessories, and daily essentials.</p>
+</div>
+
+<div class="product-grid">
+    {% for product in products %}
+    <div class="card">
+        <div class="badge">Premium</div>
+        
+        {% if 'image' in product.keys() and product['image'] %}
+            {% if product['image'].startswith('http') %}
+                <img src="{{ product['image'] }}" alt="{{ product['name'] }}" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 20px; border-radius: 8px;">
+            {% else %}
+                <img src="{{ url_for('static', filename=product['image']) }}" onerror="this.onerror=null; this.src='https://placehold.co/600x400/f1f5f9/4f46e5?text={{ product['name'] | replace(' ', '+') }}';" alt="{{ product['name'] }}" style="width: 100%; height: 200px; object-fit: contain; margin-bottom: 20px;">
+            {% endif %}
+        {% else %}
+            <img src="https://placehold.co/600x400/f1f5f9/4f46e5?text={{ product['name'] | replace(' ', '+') }}" alt="{{ product['name'] }}" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 20px; border-radius: 8px;">
+        {% endif %}
+        
+        <h3>{{ product['name'] }}</h3>
+        <p>{{ product['description'][:60] }}...</p>
+        <div class="price">₹{{ product['price'] }}</div>
+        
+        <a href="{{ url_for('add_to_cart', product_id=product['id']) }}" class="btn"><i class="fa-solid fa-cart-plus"></i> Add to Cart</a>
+    </div>
+    {% else %}
+    <div style="grid-column: 1 / -1; text-align: center; padding: 50px; color: var(--text-secondary);">
+        <i class="fa-solid fa-box-open" style="font-size: 48px; margin-bottom: 20px;"></i>
+        <h2>No products found in the database.</h2>
+        <p style="margin-top: 10px;">
+            <a href="{{ url_for('magic_setup') }}" class="btn" style="display: inline-block; width: auto; padding: 10px 20px;">Click Here to Auto-Load Products</a>
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
