@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="support-wrapper" style="max-width: 800px; margin-top: 40px; text-align: center;">
+    <div class="support-header" style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);">
+        <i class="fa-solid {{ data['icon'] }}" style="font-size: 48px; color: var(--accent); margin-bottom: 15px;"></i>
+        <h2>{{ data['title'] }}</h2>
+    </div>
+    
+    <div class="support-body" style="padding: 40px;">
+        <p style="font-size: 16px; line-height: 1.8; color: var(--text-secondary); text-align: left;">
+            {{ data['text'] }}
+        </p>
+        
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);">
+            <a href="{{ url_for('index') }}" class="btn" style="display: inline-block; width: auto; padding: 10px 20px;">
+                <i class="fa-solid fa-arrow-left"></i> Return to Store
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
