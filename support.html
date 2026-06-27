@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="support-wrapper">
+    <div class="support-header">
+        <h2><i class="fa-solid fa-headset"></i> Help Desk Center</h2>
+        <p>We typically respond to customer escalations within 2 hours.</p>
+    </div>
+    
+    <div class="support-body">
+        <form method="POST" action="{{ url_for('support') }}">
+            <label class="field-label">Subject Line</label>
+            <input type="text" name="subject" placeholder="e.g., Delivery Issue with Order #ORD-001" required>
+            
+            <label class="field-label">Elaborate Your Concern</label>
+            <textarea name="message" rows="5" placeholder="Provide detailed tracking info or issues encountered..." required></textarea>
+            
+            <button type="submit" class="btn">File Official Ticket</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
