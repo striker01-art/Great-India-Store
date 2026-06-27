@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="support-wrapper" style="max-width: 400px; margin-top: 80px;">
+    <div class="support-header" style="background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);">
+        <i class="fa-solid fa-user-shield" style="font-size: 48px; margin-bottom: 10px;"></i>
+        <h2>Admin Login</h2>
+    </div>
+    
+    <div class="support-body">
+        <form method="POST" action="{{ url_for('admin_login') }}">
+            <label class="field-label">Security Protocol Key</label>
+            <input type="password" name="password" placeholder="Enter admin password..." required>
+            
+            <button type="submit" class="btn" style="background: #ef4444;"><i class="fa-solid fa-lock-open"></i> Authenticate</button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 20px; font-size: 13px; color: var(--text-secondary);">
+            Default Project Password: <strong>RRKGPCST2026</strong>
+        </p>
+    </div>
+</div>
+{% endblock %}
