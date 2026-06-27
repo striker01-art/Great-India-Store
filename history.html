@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="support-wrapper" style="max-width: 800px;">
+    <div class="support-header" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+        <h2><i class="fa-solid fa-box-open"></i> Order History</h2>
+    </div>
+    
+    <div class="support-body">
+        {% if orders %}
+        <table style="width: 100%; text-align: left; border-collapse: collapse;">
+            <tr style="border-bottom: 2px solid var(--border); background-color: var(--background);">
+                <th style="padding: 15px;">Order ID</th>
+                <th style="padding: 15px;">Date</th>
+                <th style="padding: 15px;">Amount</th>
+                <th style="padding: 15px;">Status</th>
+            </tr>
+            {% for order in orders %}
+            <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 15px; font-family: monospace; font-weight: 600;">#ORD-{{ order['id'] }}</td>
+                <td style="padding: 15px; color: var(--text-secondary);">
+                    {{ order['created_at'][:10] if 'created_at' in order.keys() and order['created_at'] else 'Today' }}
+                </td>
+                <td style="padding: 15px; font-weight: 600;">
+                    ₹{{ order['total_amount'] if 'total_amount' in order.keys() else '0.00' }}
+                </td>
+                <td style="padding: 15px;">
+                    <span style="background: #fef3c7; color: #d97706; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                        {{ order['status'] if 'status' in order.keys() else 'Processing' }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <div style="text-align: center; padding: 40px;">
+            <p>You haven't placed any orders yet.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
